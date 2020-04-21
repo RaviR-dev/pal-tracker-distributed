@@ -27,6 +27,7 @@ public class ProjectClient {
 
     public ProjectInfo getProjectFromCache(long projectId, Throwable cause) {
         logger.info("Getting project with id {} from cache", projectId);
+        logger.error("Failed reason", cause);
         return projectsCache.get(projectId);
     }
 }
