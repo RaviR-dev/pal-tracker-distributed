@@ -3,7 +3,6 @@ package io.pivotal.pal.tracker.gradlebuild
 import groovy.json.JsonSlurper
 import org.flywaydb.gradle.FlywayExtension
 import org.flywaydb.gradle.task.FlywayMigrateTask
-import org.flywaydb.gradle.task.FlywayCleanTask
 import org.flywaydb.gradle.task.FlywayRepairTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -50,12 +49,6 @@ class CfMigrationPlugin implements Plugin<Project> {
                 }
 
                 task("cfMigrate", type: FlywayMigrateTask, group: "Migration") {
-                    dependsOn "openTunnel"
-                    finalizedBy "closeTunnel"
-                    doFirst { extension = buildFlywayExtension(project, credentials) }
-                }
-
-                task("cfClean", type: FlywayCleanTask, group: "Migration") {
                     dependsOn "openTunnel"
                     finalizedBy "closeTunnel"
                     doFirst { extension = buildFlywayExtension(project, credentials) }
